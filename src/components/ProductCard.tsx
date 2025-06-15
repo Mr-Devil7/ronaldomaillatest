@@ -1,18 +1,19 @@
+// src/components/ProductCard.tsx
 import React from 'react';
 import { ShoppingCart, Check } from 'lucide-react';
 import { Product } from '../types';
-import { useCart } from '../hooks/useCart';
+import { useCartContext } from '../context/CartContext'; // Changed from useCart
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { addToCart } = useCart();
+  const { addToCart } = useCartContext(); // Changed from useCart
   const [isAdded, setIsAdded] = React.useState(false);
 
   const handleAddToCart = () => {
-    addToCart(product);
+    addToCart(product); // Adds to the shared cart state
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
   };
@@ -25,7 +26,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           onError={(e) => {
-            // Fallback to a placeholder if image fails to load
             e.currentTarget.src = 'https://images.pexels.com/photos/1105019/pexels-photo-1105019.jpeg?auto=compress&cs=tinysrgb&w=500';
           }}
         />
