@@ -12,11 +12,10 @@ import Terms from './components/Terms';
 import Services from './components/Services';
 import Cart from './components/Cart';
 import LanguagePopup from './components/LanguagePopup';
-import { useCart } from './hooks/useCart';
+import { CartProvider } from './context/CartContext'; // Import the CartProvider
 
 function App() {
   const [currentSection, setCurrentSection] = useState('home');
-  const cart = useCart();
 
   const handleNavigate = (section: string) => {
     setCurrentSection(section);
@@ -46,13 +45,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header currentSection={currentSection} onNavigate={handleNavigate} />
-      <main>{renderContent()}</main>
-      <Footer onNavigate={handleNavigate} />
-      <Cart />
-      <LanguagePopup />
-    </div>
+    <CartProvider> {/* Wrap the app with CartProvider */}
+      <div className="min-h-screen bg-white">
+        <Header currentSection={currentSection} onNavigate={handleNavigate} />
+        <main>{renderContent()}</main>
+        <Footer onNavigate={handleNavigate} />
+        <Cart />
+        <LanguagePopup />
+      </div>
+    </CartProvider>
   );
 }
 
