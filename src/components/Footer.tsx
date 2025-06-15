@@ -16,10 +16,35 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       { label: 'Contact', action: () => onNavigate('contact') }
     ],
     products: [
-      { label: 'Smart Irrigation', action: () => onNavigate('services') },
-      { label: 'Crop Monitoring', action: () => onNavigate('services') },
-      { label: 'Weather Stations', action: () => onNavigate('services') },
-      { label: 'Automation Systems', action: () => onNavigate('services') }
+      { label: 'Insecticides', action: () => {
+        onNavigate('services');
+        // Set category after navigation
+        setTimeout(() => {
+          const event = new CustomEvent('setCategory', { detail: 'Insecticides' });
+          window.dispatchEvent(event);
+        }, 100);
+      }},
+      { label: 'Seeds', action: () => {
+        onNavigate('services');
+        setTimeout(() => {
+          const event = new CustomEvent('setCategory', { detail: 'Seeds' });
+          window.dispatchEvent(event);
+        }, 100);
+      }},
+      { label: 'Fertilizers', action: () => {
+        onNavigate('services');
+        setTimeout(() => {
+          const event = new CustomEvent('setCategory', { detail: 'Fertilizers' });
+          window.dispatchEvent(event);
+        }, 100);
+      }},
+      { label: 'Plants', action: () => {
+        onNavigate('services');
+        setTimeout(() => {
+          const event = new CustomEvent('setCategory', { detail: 'Plants' });
+          window.dispatchEvent(event);
+        }, 100);
+      }}
     ],
     support: [
       { label: 'Documentation', action: () => {} },

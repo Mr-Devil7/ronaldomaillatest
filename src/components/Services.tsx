@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { products } from '../data/products';
 import ProductCard from './ProductCard';
 
@@ -11,6 +11,19 @@ const Services: React.FC = () => {
     { id: 'Fertilizers', name: 'Fertilizers', icon: '🧪' },
     { id: 'Plants', name: 'Plants', icon: '🌿' }
   ];
+
+  // Listen for category change events from footer
+  useEffect(() => {
+    const handleCategoryChange = (event: CustomEvent) => {
+      setSelectedCategory(event.detail);
+    };
+
+    window.addEventListener('setCategory', handleCategoryChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('setCategory', handleCategoryChange as EventListener);
+    };
+  }, []);
 
   const filteredProducts = products.filter(product => product.category === selectedCategory);
 
