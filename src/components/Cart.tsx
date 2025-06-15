@@ -1,6 +1,7 @@
+// src/components/Cart.tsx
 import React, { useState } from 'react';
 import { X, Plus, Minus, Trash2, MessageCircle } from 'lucide-react';
-import { useCart } from '../hooks/useCart';
+import { useCartContext } from '../context/CartContext'; // Use the context
 
 const Cart: React.FC = () => {
   const { 
@@ -11,7 +12,7 @@ const Cart: React.FC = () => {
     removeFromCart, 
     getTotalPrice,
     clearCart 
-  } = useCart();
+  } = useCartContext(); // Updated to useCartContext
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
