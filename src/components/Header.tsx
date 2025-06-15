@@ -1,7 +1,7 @@
 // src/components/Header.tsx
 import React, { useContext, useState } from 'react';
 import { ShoppingCart, Menu, X, Cloud, Globe } from 'lucide-react';
-import { useCart } from '../hooks/useCart';
+import { useCartContext } from '../context/CartContext'; // Use the context
 import { LanguageContext } from '../context/LanguageContext';
 import LanguagePopup from './LanguagePopup';
 
@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ currentSection, onNavigate }) => {
-  const { getTotalItems, setIsCartOpen } = useCart();
+  const { getTotalItems, setIsCartOpen } = useCartContext(); // Updated to useCartContext
   const { t } = useContext(LanguageContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isWeatherOpen, setIsWeatherOpen] = useState(false);
@@ -25,7 +25,6 @@ const Header: React.FC<HeaderProps> = ({ currentSection, onNavigate }) => {
   ];
 
   const handleCartClick = () => {
-    console.log('Cart button clicked'); // Debug log
     setIsCartOpen(true);
   };
 
@@ -41,7 +40,6 @@ const Header: React.FC<HeaderProps> = ({ currentSection, onNavigate }) => {
                 alt="Agrow Logo"
                 className="h-10 w-auto"
                 onError={(e) => {
-                  // Fallback to text logo if image fails to load
                   e.currentTarget.style.display = 'none';
                   e.currentTarget.nextElementSibling!.style.display = 'block';
                 }}
