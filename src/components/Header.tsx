@@ -24,6 +24,11 @@ const Header: React.FC<HeaderProps> = ({ currentSection, onNavigate }) => {
     { id: 'terms', label: t('header.terms') },
   ];
 
+  const handleCartClick = () => {
+    console.log('Cart button clicked'); // Debug log
+    setIsCartOpen(true);
+  };
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
@@ -88,12 +93,13 @@ const Header: React.FC<HeaderProps> = ({ currentSection, onNavigate }) => {
 
               {/* Cart Button */}
               <button
-                onClick={() => setIsCartOpen(true)}
+                onClick={handleCartClick}
                 className="relative p-2 text-text hover:text-primary transition-colors duration-200"
+                title="Shopping Cart"
               >
                 <ShoppingCart className="h-6 w-6" />
                 {getTotalItems() > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
                     {getTotalItems()}
                   </span>
                 )}

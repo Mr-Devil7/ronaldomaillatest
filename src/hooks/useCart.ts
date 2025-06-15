@@ -9,7 +9,12 @@ export const useCart = () => {
   useEffect(() => {
     const savedCart = localStorage.getItem('agrow-cart');
     if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
+      try {
+        setCartItems(JSON.parse(savedCart));
+      } catch (error) {
+        console.error('Error loading cart from localStorage:', error);
+        setCartItems([]);
+      }
     }
   }, []);
 
